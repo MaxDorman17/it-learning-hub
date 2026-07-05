@@ -99,13 +99,38 @@
       </details>
 
       <details class="acc">
-        <summary><span class="acc-ico">🏢</span>Sempervox context<span class="acc-chev">▾</span></summary>
+        <summary><span class="acc-ico">🏢</span>The platforms Sempervox uses<span class="acc-chev">▾</span></summary>
         <div class="acc-body">
-          <p>Sempervox provides managed telephony, so their clients run on a hosted phone platform. The concepts
-             above transfer to any system, but the exact screens differ per platform.</p>
-          <div class="callout warn"><b>Ask your dad:</b> which phone-system platform Sempervox uses (e.g. a specific
-            hosted PBX). Once you know, this page can be tailored so the ticket steps match the actual admin portal
-            you'll log into — until then it's deliberately platform-agnostic.</div>
+          <p>Sempervox delivers telephony on <strong>two</strong> platforms — so you'll meet both on tickets. The
+             concepts above apply to each; here's where they actually differ.</p>
+
+          <h4>1. Gamma Horizon (hosted phone system)</h4>
+          <p>Gamma is a major UK telecoms wholesaler, and <strong>Horizon</strong> is their cloud-hosted PBX — no
+             on-site phone hardware, hosted in resilient UK datacentres. It's managed through an easy
+             <strong>web admin portal</strong>, and this is the one you'll log into most for phone tickets.</p>
+          <ul>
+            <li><strong>Three levels of control</strong> in the portal: <em>company</em>, <em>site</em> (location), and <em>individual user</em> — know which level a setting lives at.</li>
+            <li><strong>Users can self-serve</strong> their own phone: call forwarding, voicemail, do-not-disturb.</li>
+            <li><strong>Admins manage</strong> call groups, hunt groups, queues and <strong>auto-attendants</strong> (the "press 1 for sales" menus).</li>
+            <li><strong>Apps</strong> — desktop and mobile softphones so users can work from anywhere.</li>
+            <li><strong>Busy Lamp keys</strong> (see who's free), and <strong>Horizon Integrator</strong> for CRM screen-popping.</li>
+          </ul>
+          <div class="callout"><b>Typical L1 Horizon tickets:</b> "change where my calls forward", "add someone to a
+            ring group", "set up out-of-hours on the auto-attendant", "my softphone app won't sign in", "assign a new
+            user a number/extension". Nearly all are done in the Horizon web portal.</div>
+
+          <h4>2. Microsoft Teams Voice (Teams Phone)</h4>
+          <p>Because Sempervox is a Microsoft house, some clients make and take external calls <em>inside Teams</em>
+             rather than on a Horizon handset. This is managed in the <strong>Teams admin center</strong>
+             (<code>admin.teams.microsoft.com</code>) and ties into the same MS365 identity you already know.</p>
+          <ul>
+            <li>Users get a <strong>phone number assigned</strong> and a calling policy/licence in the Teams admin center.</li>
+            <li>External calling reaches the phone network via a <strong>calling plan, Operator Connect, or Direct Routing</strong> (how the numbers connect — often through Gamma).</li>
+            <li>Common tickets: "I can't dial external numbers from Teams", "no dial pad showing", "assign me a number" — usually a licence/policy or number-assignment issue.</li>
+          </ul>
+          <div class="callout warn"><b>First question on any phone ticket:</b> "Are you on a Horizon phone/app, or
+            calling through Teams?" That one answer tells you which portal to open — and stops you troubleshooting the
+            wrong system.</div>
         </div>
       </details>
     </div>
