@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoIP &amp; Telephony — IT Engineer Learning Hub</title>
+  <meta name="description" content="SIP basics, call routing and common phone-system tickets for a VoIP-focused MSP." />
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="wrap guide">
+      <section class="page-hero">
+        <span class="eyebrow">Sempervox core</span>
+        <h1>VoIP &amp; Telephony</h1>
+      </section>
+
+      <p class="guide-intro">Most L1 guides ignore phones — but this is Sempervox's business. Understand how a
+        call actually flows and you'll stand out fast. Almost every VoIP fault comes back to <em>the network</em>.</p>
+
+      <details class="acc" open>
+        <summary><span class="acc-ico">🔌</span>How VoIP actually works<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p><strong>VoIP</strong> (Voice over IP) turns your voice into data packets and sends them over the
+             internet instead of a traditional phone line. The building blocks:</p>
+          <ul>
+            <li><strong>PBX</strong> — the phone system that routes calls for the business. A <strong>hosted/cloud PBX</strong> lives in the provider's cloud (this is the modern MSP model).</li>
+            <li><strong>Extension</strong> — an internal number for a user or desk.</li>
+            <li><strong>SIP trunk</strong> — the virtual line connecting the PBX to the public phone network, carrying multiple calls at once.</li>
+            <li><strong>DID</strong> — a public phone number that rings a specific person/extension directly.</li>
+            <li><strong>Handset / softphone</strong> — a physical desk phone, or an app on a PC/mobile.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">📶</span>Anatomy of a call: SIP vs RTP<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>This one distinction explains a huge share of VoIP tickets:</p>
+          <ul>
+            <li><strong>SIP</strong> (signalling) sets up, rings, and ends the call — the "dialling and connecting" part.</li>
+            <li><strong>RTP</strong> (media) carries the actual <em>audio</em> once connected.</li>
+          </ul>
+          <p>A phone <strong>registers</strong> to the PBX (SIP), then when a call connects the voice flows as RTP.</p>
+          <div class="callout"><b>The key insight:</b> if a call <em>connects and rings but you get one-way or no
+            audio</em>, SIP is fine and <strong>RTP is being blocked</strong> — nearly always a firewall or NAT
+            issue on the network. That single deduction impresses interviewers and seniors alike.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">🔀</span>Call routing<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>How an inbound call finds the right person:</p>
+          <ul>
+            <li><strong>Auto-attendant / IVR</strong> — "press 1 for sales" menus.</li>
+            <li><strong>Ring group / hunt group</strong> — rings several phones together or in sequence.</li>
+            <li><strong>Call queue</strong> — holds callers and feeds them to available agents.</li>
+            <li><strong>Voicemail</strong> — catches unanswered calls; can email the recording.</li>
+            <li><strong>Out-of-hours / time-based routing</strong> — different behaviour outside business hours or on holidays.</li>
+          </ul>
+          <p>Common request: "calls aren't reaching X" — usually a routing/ring-group membership change, not a fault.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">🎧</span>Common VoIP tickets<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <h4>Handset won't register / "no service"</h4>
+          <p>Check network cable/PoE and power, that it has an IP, and that credentials/config are correct. A reboot re-registers it.</p>
+          <h4>One-way audio or no audio</h4>
+          <p>Call connects but no voice = <strong>RTP blocked</strong> → firewall/NAT. Check QoS and firewall rules; test on another network.</p>
+          <h4>Poor quality — choppy, robotic, breaking up</h4>
+          <p>Network problem: <strong>jitter</strong>, <strong>latency</strong> or <strong>packet loss</strong>. Check for congestion, missing QoS, or Wi-Fi (voice hates Wi-Fi — prefer wired).</p>
+          <h4>Dropped calls</h4>
+          <p>Intermittent connectivity, SIP timers, or an unstable internet link. Check the WAN and any recent network changes.</p>
+          <h4>Echo</h4>
+          <p>Often a hardware/headset or volume-level issue; sometimes a gateway config.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">📊</span>Quality &amp; the network<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>Voice is <em>real-time</em> — packets that arrive late are useless, so VoIP is far more network-sensitive
+             than email or web. What to know:</p>
+          <ul>
+            <li><strong>Bandwidth</strong> — a call uses roughly <strong>~85–100 kbps</strong> each way; it's low, but it must be <em>consistent</em>.</li>
+            <li><strong>Latency</strong> — keep under ~150 ms or people talk over each other.</li>
+            <li><strong>Jitter</strong> — variation in packet timing; causes choppy audio.</li>
+            <li><strong>Packet loss</strong> — even 1–2% is audible as gaps/robotic voice.</li>
+            <li><strong>QoS</strong> — prioritises voice over other traffic so a big download doesn't wreck a call.</li>
+          </ul>
+          <div class="callout"><b>Golden rule:</b> when in doubt on a VoIP fault, <strong>suspect the network</strong> —
+            wired vs Wi-Fi, congestion, QoS, and firewall/NAT are the usual culprits.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">🏢</span>Sempervox context<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>Sempervox provides managed telephony, so their clients run on a hosted phone platform. The concepts
+             above transfer to any system, but the exact screens differ per platform.</p>
+          <div class="callout warn"><b>Ask your dad:</b> which phone-system platform Sempervox uses (e.g. a specific
+            hosted PBX). Once you know, this page can be tailored so the ticket steps match the actual admin portal
+            you'll log into — until then it's deliberately platform-agnostic.</div>
+        </div>
+      </details>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="main.js?v=1"></script>
+</body>
+</html>

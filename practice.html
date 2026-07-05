@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practice — IT Engineer Learning Hub</title>
+  <meta name="description" content="Quizzes, flashcards and a branching ticket simulator to test your L1 support skills." />
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="wrap">
+      <section class="page-hero">
+        <span class="eyebrow">Prove it</span>
+        <h1>Practice</h1>
+        <p class="lead">Reading is rehearsal; this is the test. Your quiz scores and mastered flashcards
+          feed the progress dashboard on the home page.</p>
+      </section>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="tab-quiz">❓ Quizzes</button>
+        <button class="tab" data-tab="tab-cards">🃏 Flashcards</button>
+        <button class="tab" data-tab="tab-sim">🎮 Ticket Simulator</button>
+      </div>
+
+      <!-- QUIZZES -->
+      <section class="tab-panel active" id="tab-quiz">
+        <div id="quiz-list" class="q-grid"><!-- quiz cards by practice.js --></div>
+        <div id="quiz-host" class="quiz-host" style="display:none"><!-- active quiz --></div>
+      </section>
+
+      <!-- FLASHCARDS -->
+      <section class="tab-panel" id="tab-cards">
+        <div class="fc-progress-bar" id="fc-progress"></div>
+        <div id="fc-host" class="fc-host"><!-- current card by practice.js --></div>
+      </section>
+
+      <!-- SIMULATOR -->
+      <section class="tab-panel" id="tab-sim">
+        <p class="muted sim-intro">A realistic ticket lands. Pick your next move and watch it branch —
+          resolve it well, or learn from a wrong turn. There's no penalty for exploring; that's the point.</p>
+        <div id="sim-list" class="q-grid"><!-- scenario cards by practice.js --></div>
+        <div id="sim-host" class="sim-host" style="display:none"><!-- active scenario --></div>
+      </section>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="main.js?v=1"></script>
+  <script src="glossary-data.js?v=1"></script>
+  <script src="practice-data.js?v=1"></script>
+  <script src="practice.js?v=1"></script>
+</body>
+</html>

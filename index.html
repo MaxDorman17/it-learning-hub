@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Engineer Learning Hub</title>
+  <meta name="description" content="A study and reference tool for Level 1 IT support: runbooks, MS365, VoIP, AI automation, quizzes and a ticket simulator." />
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="wrap">
+
+      <!-- Hero -->
+      <section class="home-hero">
+        <span class="eyebrow">Level 1 Support &middot; Study &amp; Reference</span>
+        <h1>Learn the job before<br /><span class="grad">day one on the desk.</span></h1>
+        <p class="lead muted">Runbooks for the tickets you'll actually get, MS365 &amp; VoIP admin,
+          the AI tools the company is moving to, plus quizzes and a ticket simulator to test yourself.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="runbooks.html">Start with runbooks &rarr;</a>
+          <a class="btn btn-ghost" href="practice.html">Test myself</a>
+        </div>
+      </section>
+
+      <!-- Progress dashboard -->
+      <section class="section">
+        <div class="section-title">
+          <h2>Your progress</h2>
+          <span class="hint">Saved in this browser</span>
+        </div>
+        <div class="stats" id="dashboard"><!-- rendered by main.js --></div>
+      </section>
+
+      <!-- Pillars -->
+      <section class="section">
+        <div class="section-title">
+          <h2>Explore the hub</h2>
+          <span class="hint">Four pillars + tools</span>
+        </div>
+        <div class="grid grid-3">
+          <a class="card link-card" href="runbooks.html">
+            <div class="icon">🎫</div>
+            <h3>L1 Ticket Runbooks</h3>
+            <p>Step-by-step for the daily grind: password resets, lockouts, onboarding, Outlook, MFA, printers, VPN.</p>
+            <span class="tag">The backbone &middot; Phase 2</span>
+          </a>
+          <a class="card link-card" href="ms365.html">
+            <div class="icon">☁️</div>
+            <h3>MS365 Admin</h3>
+            <p>Admin center, Exchange, licensing and SharePoint — building on the tenant work you're already doing.</p>
+            <span class="tag">Phase 3</span>
+          </a>
+          <a class="card link-card" href="voip.html">
+            <div class="icon">📞</div>
+            <h3>VoIP &amp; Telephony</h3>
+            <p>SIP basics, call routing and common phone-system tickets — Sempervox's core business.</p>
+            <span class="tag">Phase 3</span>
+          </a>
+          <a class="card link-card" href="ai-automation.html">
+            <div class="icon">🤖</div>
+            <h3>AI &amp; Automation</h3>
+            <p>Copilot, Power Automate &amp; Copilot Studio, Hermes agent — where the company is heading.</p>
+            <span class="tag">Phase 3</span>
+          </a>
+          <a class="card link-card" href="cheatsheets.html">
+            <div class="icon">⌨️</div>
+            <h3>Cheat Sheets</h3>
+            <p>PowerShell one-liners, MS365 admin commands and speed references for when you're mid-ticket.</p>
+            <span class="tag">Phase 3</span>
+          </a>
+          <a class="card link-card" href="practice.html">
+            <div class="icon">🧠</div>
+            <h3>Practice</h3>
+            <p>Quizzes, flashcards and a ticket simulator that branches on the choices you make.</p>
+            <span class="tag">Phase 4</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- How to use -->
+      <section class="section">
+        <div class="card">
+          <h3>How to use this hub</h3>
+          <p class="muted">Work the <b>runbooks</b> the way you'd work a real ticket — read the symptom, the
+          questions to ask, the fix, and when to escalate. Then hit <b>Practice</b> to prove you've got it.
+          Your progress bar fills as you go. It's built as a static site so it also works as a quick reference
+          while you're actually on the desk.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="main.js?v=1"></script>
+</body>
+</html>

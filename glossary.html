@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glossary — IT Engineer Learning Hub</title>
+  <meta name="description" content="Searchable glossary of IT support and MSP acronyms and terms." />
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="wrap">
+      <section class="page-hero">
+        <span class="eyebrow">Reference</span>
+        <h1>Glossary</h1>
+        <p class="lead">The acronym soup, decoded. When a colleague or ticket throws a term at you, look it up here.</p>
+      </section>
+
+      <section class="section">
+        <div class="search">
+          <span class="ico">🔍</span>
+          <input type="search" id="gl-search" placeholder="Search terms — try “SIP”, “mailbox”, “DNS”…" />
+        </div>
+        <div class="chips" id="gl-chips"><!-- category chips by glossary.js --></div>
+        <div class="rb-count muted" id="gl-count"></div>
+      </section>
+
+      <section class="section">
+        <div class="gl-list" id="gl-list"><!-- terms by glossary.js --></div>
+      </section>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="main.js?v=1"></script>
+  <script src="glossary-data.js?v=1"></script>
+  <script src="glossary.js?v=1"></script>
+</body>
+</html>

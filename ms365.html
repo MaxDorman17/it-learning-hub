@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MS365 Admin — IT Engineer Learning Hub</title>
+  <meta name="description" content="Microsoft 365 admin center, Exchange, licensing and SharePoint for L1 support." />
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="wrap guide">
+      <section class="page-hero">
+        <span class="eyebrow">Cloud admin</span>
+        <h1>MS365 Admin</h1>
+      </section>
+
+      <p class="guide-intro">The Microsoft 365 admin work behind most tickets. Learn the map of admin
+        centers first — knowing <em>which portal does what</em> saves you more time than anything else.</p>
+
+      <details class="acc" open>
+        <summary><span class="acc-ico">🗺️</span>The admin centers — which portal does what<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>Microsoft 365 isn't one console — it's several, each owning part of the estate. Getting lost here
+             is the #1 time-sink for new engineers, so learn this map.</p>
+          <ul>
+            <li><strong>Microsoft 365 admin center</strong> — <code>admin.microsoft.com</code> — users, licences, groups, service health, billing. Your home base.</li>
+            <li><strong>Entra admin center</strong> — <code>entra.microsoft.com</code> — identity: sign-in logs, MFA, Conditional Access, SSPR.</li>
+            <li><strong>Exchange admin center</strong> — <code>admin.exchange.microsoft.com</code> — mailboxes, shared mailboxes, mail flow, message trace.</li>
+            <li><strong>Teams admin center</strong> — <code>admin.teams.microsoft.com</code> — Teams policies, phone/calling, provisioning.</li>
+            <li><strong>SharePoint admin center</strong> — <code>[tenant]-admin.sharepoint.com</code> — sites, sharing, storage.</li>
+            <li><strong>Defender / Security</strong> — <code>security.microsoft.com</code> — quarantine, threats, alerts.</li>
+            <li><strong>Intune</strong> — <code>intune.microsoft.com</code> — device and app management.</li>
+          </ul>
+          <div class="callout"><b>Tip:</b> most tickets touch one or two of these. Ask yourself "is this about
+            <em>who they are</em> (Entra), <em>their email</em> (Exchange), <em>their files</em> (SharePoint), or
+            <em>their device</em> (Intune)?" and go straight there.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">👤</span>Users &amp; licensing<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>Everything about a person's account lives under <strong>Users → Active users</strong> in the 365 admin center.</p>
+          <h4>Creating &amp; managing users</h4>
+          <ul>
+            <li>Follow the <strong>naming convention</strong> (usually <code>firstname.lastname@domain</code>).</li>
+            <li>Set a <strong>usage location</strong> — required before some licences will assign.</li>
+            <li>Use <strong>Block sign-in</strong> to instantly cut access without deleting the account (leavers).</li>
+          </ul>
+          <h4>Licensing</h4>
+          <p>Licences come from a <strong>pool</strong> the tenant has bought. You <em>assign</em> a free one — you
+             don't buy per user unless the pool is empty (which needs approval).</p>
+          <div class="callout warn"><b>Least privilege:</b> most users need <em>no</em> admin role. Only assign roles
+             (like Helpdesk Admin) with sign-off — over-granting is a security risk.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">📧</span>Exchange Online<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>Email lives in the <strong>Exchange admin center</strong>. The things you'll touch most:</p>
+          <ul>
+            <li><strong>Mailboxes</strong> — a user's own email. <strong>Shared mailboxes</strong> (e.g. <code>info@</code>) need no licence under 50 GB.</li>
+            <li><strong>Permissions</strong> — Full Access (read it), Send As (send <em>as</em> it), Send on Behalf.</li>
+            <li><strong>Distribution lists</strong> — email one address, everyone in it receives it.</li>
+            <li><strong>Message trace</strong> — prove what happened to an email (delivered / blocked / quarantined). Your evidence tool for "I never got it".</li>
+            <li><strong>Quarantine</strong> — release legitimate mail wrongly caught as spam (from the Security portal).</li>
+          </ul>
+          <div class="callout"><b>See also:</b> the <a href="runbooks.html#shared-mailbox-access">Shared mailbox</a> and
+            <a href="runbooks.html#outlook-send-receive">Outlook</a> runbooks put this into practice.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">🗂️</span>SharePoint &amp; OneDrive<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>SharePoint hosts team sites, document libraries and intranets; OneDrive is each person's personal
+             file store. Both are managed in the <strong>SharePoint admin center</strong>.</p>
+          <h4>Permissions — the thing that generates tickets</h4>
+          <ul>
+            <li><strong>Owner</strong> — full control, can manage permissions.</li>
+            <li><strong>Member</strong> — can edit content.</li>
+            <li><strong>Visitor</strong> — read-only.</li>
+          </ul>
+          <p>"Access denied" is almost always a <em>permissions</em> problem, not a technical fault — check the
+             user's level and the sharing link before anything else.</p>
+          <div class="callout"><b>Recovery:</b> deleted sites are recoverable for <strong>93 days</strong>; deleted
+            files go to the recycle bin (site, then second-stage). You can often recover before escalating.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">🛡️</span>Entra ID &amp; security basics<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>Identity is managed in the <strong>Entra admin center</strong>. As L1 you'll mostly <em>read</em> here
+             and make small, safe changes.</p>
+          <ul>
+            <li><strong>Sign-in logs</strong> — the truth about why a login failed, and from where. Check these before guessing.</li>
+            <li><strong>Authentication methods</strong> — where you reset/re-register a user's MFA.</li>
+            <li><strong>Groups</strong> — security groups (grant access) vs Microsoft 365 groups (team + mailbox + site).</li>
+            <li><strong>Conditional Access</strong> — policies that may block a sign-in for a reason (location, device). Recognise it; don't change it without sign-off.</li>
+          </ul>
+          <div class="callout warn"><b>Security instinct:</b> unexpected sign-ins from odd countries, or a user
+            suddenly with mailbox forwarding rules, means possible compromise — escalate to security, don't sit on it.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">💻</span>PowerShell for M365<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>The portals cover 90% of L1 work, but PowerShell is faster for bulk changes and some settings only
+             exist there. You'll grow into it — start by recognising it, then using copy-paste commands.</p>
+          <ul>
+            <li><strong>Exchange Online</strong> — <code>Connect-ExchangeOnline</code> then cmdlets like <code>Get-Mailbox</code>.</li>
+            <li><strong>Microsoft Graph</strong> — <code>Connect-MgGraph</code> for users, groups, licences (the modern module).</li>
+          </ul>
+          <div class="callout"><b>Ready-made commands:</b> the <a href="cheatsheets.html">Cheat Sheets</a> page has
+            copy-paste Exchange and Graph one-liners for the common tasks.</div>
+        </div>
+      </details>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="main.js?v=1"></script>
+</body>
+</html>

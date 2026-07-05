@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L1 Ticket Runbooks — IT Engineer Learning Hub</title>
+  <meta name="description" content="Step-by-step runbooks for the Level 1 support tickets you'll actually get." />
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="wrap">
+      <!-- LIST VIEW -->
+      <div id="rb-list-view">
+        <section class="page-hero">
+          <span class="eyebrow">The backbone</span>
+          <h1>L1 Ticket Runbooks</h1>
+          <p class="lead">Every runbook follows the same shape you'll use on a real ticket:
+            <b>symptom &rarr; questions to ask &rarr; diagnosis &rarr; fix &rarr; escalate-if</b>.
+            Read them like you're rehearsing the job — because you are.</p>
+        </section>
+
+        <section class="section">
+          <div class="search">
+            <span class="ico">🔍</span>
+            <input type="search" id="rb-search" placeholder="Search runbooks — try “password”, “outlook”, “vpn”…" />
+          </div>
+          <div class="chips" id="rb-chips"><!-- category chips by runbooks.js --></div>
+          <div class="rb-count muted" id="rb-count"></div>
+        </section>
+
+        <section class="section">
+          <div class="grid grid-3" id="rb-list"><!-- cards by runbooks.js --></div>
+        </section>
+      </div>
+
+      <!-- DETAIL VIEW -->
+      <div id="rb-detail" class="rb-detail" style="display:none"><!-- detail by runbooks.js --></div>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="main.js?v=1"></script>
+  <script src="runbooks-data.js?v=1"></script>
+  <script src="runbooks.js?v=1"></script>
+</body>
+</html>

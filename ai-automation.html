@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI &amp; Automation — IT Engineer Learning Hub</title>
+  <meta name="description" content="Microsoft Copilot, Power Automate, Copilot Studio and the Hermes agent for MSP automation." />
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="wrap guide">
+      <section class="page-hero">
+        <span class="eyebrow">Where the company is heading</span>
+        <h1>AI &amp; Automation</h1>
+      </section>
+
+      <p class="guide-intro">Sempervox is moving to AI and cloud. Being the person who can actually <em>use</em>
+        these tools — not just talk about them — is how you make yourself valuable beyond closing tickets.
+        Since their ticket system is a <strong>Power Apps portal on Dataverse</strong>, the Microsoft Power
+        Platform is their natural automation home.</p>
+
+      <details class="acc" open>
+        <summary><span class="acc-ico">✨</span>Microsoft Copilot<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p><strong>Copilot</strong> is Microsoft's AI assistant. There are a few flavours — know the difference:</p>
+          <ul>
+            <li><strong>Microsoft 365 Copilot</strong> (paid add-on) — built into Word, Excel, Outlook, Teams; grounded in <em>your company's</em> data and respects existing permissions.</li>
+            <li><strong>Copilot Chat</strong> — the web/Edge chat assistant for general questions and drafting.</li>
+          </ul>
+          <h4>Practical uses for L1 support</h4>
+          <ul>
+            <li>Draft a clear reply to a user from a few bullet points.</li>
+            <li>Summarise a long, messy ticket thread into "what's the actual problem".</li>
+            <li>Explain an error message or a PowerShell command you don't recognise.</li>
+            <li>Turn a spreadsheet of data into a quick summary or chart.</li>
+          </ul>
+          <div class="callout warn"><b>Golden rule:</b> AI <em>drafts</em>, you <em>verify</em>. Never paste a Copilot
+            answer to a customer without checking it — and never put sensitive customer data into a tool that isn't
+            approved for it. Knowing this boundary is itself a valuable skill.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">⚙️</span>Power Automate<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p><strong>Power Automate</strong> builds workflows — "when <em>this</em> happens, do <em>that</em>" —
+             across Microsoft 365 and hundreds of other apps. Two kinds:</p>
+          <ul>
+            <li><strong>Cloud flows</strong> — triggered by events (a new email, a new ticket, a form submission).</li>
+            <li><strong>Desktop flows (RPA)</strong> — automate clicks and keystrokes in apps that have no proper API.</li>
+          </ul>
+          <h4>Ideas that fit their ticket portal</h4>
+          <ul>
+            <li>When a <strong>new ticket</strong> is created, post it to a Teams channel and tag on-call.</li>
+            <li>Auto-<strong>triage</strong>: set priority/category from keywords in the ticket.</li>
+            <li>Kick off an <strong>onboarding checklist</strong> when HR flags a new starter.</li>
+            <li>Send an <strong>SLA warning</strong> when a ticket is nearing its deadline.</li>
+          </ul>
+          <div class="callout"><b>Concepts to learn:</b> triggers, actions, connectors, and variables. Start by
+            reading existing flows before building your own.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">🤝</span>Copilot Studio<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p><strong>Copilot Studio</strong> is a low-code tool for building your own AI <strong>agents / chatbots</strong>.
+             Because it sits on <strong>Dataverse</strong> — the same database behind their ticket portal — it's a
+             very natural next step for Sempervox.</p>
+          <h4>What you could build</h4>
+          <ul>
+            <li>An <strong>internal helpdesk bot</strong> that answers "how do I reset my password?" from your own runbooks.</li>
+            <li>A bot that <strong>logs a ticket</strong> in the portal from a Teams chat.</li>
+            <li>A knowledge assistant grounded in company documentation.</li>
+          </ul>
+          <p>You build it from <strong>topics</strong> (conversation paths) and <strong>knowledge sources</strong>
+             (docs, sites, Dataverse), then publish it to Teams or a website.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">🧩</span>The Power Platform, in one picture<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>Their ticket system is Power Apps + Dataverse, so it helps to see how the pieces fit:</p>
+          <ul>
+            <li><strong>Power Apps</strong> — build custom apps/portals (their ticket system).</li>
+            <li><strong>Power Automate</strong> — automate the workflows between them.</li>
+            <li><strong>Power BI</strong> — dashboards and reporting on the data.</li>
+            <li><strong>Copilot Studio</strong> — AI agents on top.</li>
+            <li><strong>Dataverse</strong> — the shared database underneath it all.</li>
+          </ul>
+          <p>Manage it all at <code>admin.powerplatform.microsoft.com</code>. Understanding this stack makes you
+             immediately more useful in an all-Microsoft shop.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">🌐</span>Hermes agent<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p><strong>Hermes</strong> (by Nous Research) is an <em>open-source</em> AI agent platform — a different
+             world from Microsoft's stack. It's an AI-ops tool, not an IT admin tool.</p>
+          <ul>
+            <li>Runs across <strong>many channels</strong> — Telegram, Discord, Slack, WhatsApp, Signal, email, CLI.</li>
+            <li>Has <strong>persistent memory</strong>, can spawn <strong>sub-agents</strong>, and do web/browser tasks.</li>
+            <li>Automates tasks through <strong>natural language</strong> rather than rigid flows.</li>
+          </ul>
+          <div class="callout warn"><b>Ask your dad:</b> what does Sempervox actually want Hermes <em>for</em> —
+            client automation, an internal helpdesk assistant, report generation? The answer decides what's worth
+            learning. Microsoft's Copilot Studio and Hermes overlap in "AI agent" territory but suit different jobs.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">❓</span>"openclaw" — needs confirming<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>You mentioned <strong>openclaw</strong> alongside Hermes for automation, but there's no well-known tool
+             by that name. Best guesses: you meant <strong>OpenCloud</strong> (an open-source file-collaboration
+             platform), or it's something specific your dad named.</p>
+          <div class="callout"><b>To do:</b> find out what openclaw actually is and what it's used for, and this
+            section gets built out properly. For now it's a placeholder.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary><span class="acc-ico">🎯</span>How to actually be useful with AI<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>The mindset that gets you hired and keeps you valuable:</p>
+          <ul>
+            <li><strong>Use it to learn faster</strong> — ask AI to explain errors, commands and concepts as you work.</li>
+            <li><strong>Draft, then verify</strong> — let it write the first version of a reply or a flow; you own the accuracy.</li>
+            <li><strong>Automate the boring, repeated stuff</strong> — that's where automation pays off.</li>
+            <li><strong>Respect data boundaries</strong> — know what customer data can and can't go into which tool.</li>
+          </ul>
+          <div class="callout"><b>Interview gold:</b> "I use AI to move faster but I always verify the output and I'm
+            careful about what data goes where." That sentence shows maturity most L1 candidates lack.</div>
+        </div>
+      </details>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="main.js?v=1"></script>
+</body>
+</html>
