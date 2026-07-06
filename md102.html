@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MD-102 Study — IT Engineer Learning Hub</title>
   <meta name="description" content="My MD-102 Endpoint Administrator study hub: exam blueprint, learning paths, Intune lab walkthroughs and exam traps." />
-  <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="style.css?v=5" />
 </head>
 <body>
   <div id="app-header"></div>
@@ -30,16 +30,27 @@
         <div class="md-fact"><div class="k">Renewal</div><div class="v">Yearly <small>· free</small></div></div>
       </div>
 
-      <div class="callout good"><b>Where I'm at:</b> cold practice-assessment baseline <b>40%</b> (2026-07-06).
-        Target is a steady <b>80%+</b> before booking. Weak areas flagged: <em>Prepare infrastructure ·
-        Manage &amp; maintain devices · Protect devices</em>.</div>
+      <!-- Editable practice-score / readiness tracker (rendered + saved by md102.js) -->
+      <section class="section-title" style="margin-bottom:12px">
+        <h2>My readiness</h2>
+        <span class="hint">Update after each practice assessment · saved in this browser</span>
+      </section>
+      <div id="md102-readiness">
+        <div class="callout good"><b>Where I'm at:</b> baseline <b>40%</b> (2026-07-06). Target a steady
+          <b>80%+</b> before booking. <em>Enable JavaScript to log new scores here.</em></div>
+      </div>
+      <p class="muted" style="margin:-6px 0 26px">Weak areas flagged so far: <em>Prepare infrastructure ·
+        Manage &amp; maintain devices · Protect devices</em>. Take a fresh
+        <a href="https://learn.microsoft.com/en-us/credentials/certifications/exams/md-102/practice/assessment?assessment-type=practice&amp;assessmentId=76" target="_blank" rel="noopener">free practice assessment ↗</a>
+        then log the score above.</p>
 
       <!-- ===== Blueprint ===== -->
       <details class="acc" open>
         <summary><span class="acc-ico">🎯</span>Exam blueprint — what's actually tested<span class="acc-chev">▾</span></summary>
         <div class="acc-body">
-          <p>The exam is weighted like this (skills measured as of 24 July 2026). Notice it's nearly all Intune —
-             so the whole strategy is <em>live in the Intune admin center</em>.</p>
+          <p>The exam is weighted like this (skills measured as of 24 July 2026 — from the official
+             <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/md-102" target="_blank" rel="noopener">MD-102 study guide ↗</a>).
+             Notice it's nearly all Intune — so the whole strategy is <em>live in the Intune admin center</em>.</p>
           <table class="blueprint">
             <thead><tr><th>Domain</th><th>Weight</th><th>What it really is</th></tr></thead>
             <tbody>
@@ -57,20 +68,22 @@
       <details class="acc">
         <summary><span class="acc-ico">📚</span>The 7 MD-102 learning paths (study order)<span class="acc-chev">▾</span></summary>
         <div class="acc-body">
-          <p>Free on Microsoft Learn. Search "<strong>MD-102</strong>" and pick the paths that start with MD-102
-             (<em>not</em> MS-102 — that's a different, heavier exam). Do them in this order:</p>
+          <p>All free on Microsoft Learn (opens in a new tab). Do them in this order — and make sure it's
+             <strong>MD-102</strong>, not MS-102 (a different, heavier exam):</p>
           <ul class="paths">
-            <li><span class="n">1.</span> Explore endpoint management <span class="mods">4 modules · foundation</span></li>
-            <li><span class="n">2.</span> Execute device enrollment <span class="mods">3 modules</span></li>
-            <li><span class="n">3.</span> Manage authentication &amp; compliance <span class="mods">4 modules</span></li>
-            <li><span class="n">4.</span> Deploy using cloud based tools <span class="mods">6 modules · Autopilot</span></li>
-            <li><span class="n">5.</span> Examine application management <span class="mods">3 modules</span></li>
-            <li><span class="n">6.</span> Manage endpoint security <span class="mods">4 modules</span></li>
-            <li><span class="n">7.</span> Deploy using on-premises tools <span class="mods">3 modules · skim</span></li>
+            <li><span class="n">1.</span> <a href="https://learn.microsoft.com/training/paths/explore-endpoint-management/" target="_blank" rel="noopener">Explore endpoint management ↗</a> <span class="mods">4 modules · foundation</span></li>
+            <li><span class="n">2.</span> <a href="https://learn.microsoft.com/training/paths/execute-device-enrollment/" target="_blank" rel="noopener">Execute device enrollment ↗</a> <span class="mods">3 modules</span></li>
+            <li><span class="n">3.</span> <a href="https://learn.microsoft.com/training/paths/authentication-compliance/" target="_blank" rel="noopener">Manage authentication &amp; compliance ↗</a> <span class="mods">4 modules</span></li>
+            <li><span class="n">4.</span> <a href="https://learn.microsoft.com/training/paths/deploy-cloud-based-tools/" target="_blank" rel="noopener">Deploy using cloud based tools ↗</a> <span class="mods">6 modules · Autopilot</span></li>
+            <li><span class="n">5.</span> <a href="https://learn.microsoft.com/training/paths/examine-application-management/" target="_blank" rel="noopener">Examine application management ↗</a> <span class="mods">3 modules</span></li>
+            <li><span class="n">6.</span> <a href="https://learn.microsoft.com/training/paths/manage-endpoint-security/" target="_blank" rel="noopener">Manage endpoint security ↗</a> <span class="mods">4 modules</span></li>
+            <li><span class="n">7.</span> <a href="https://learn.microsoft.com/training/paths/deploy-on-premise-based-tools/" target="_blank" rel="noopener">Deploy using on-premises tools ↗</a> <span class="mods">3 modules · skim</span></li>
           </ul>
           <div class="callout"><b>Fastest win first:</b> Microsoft flagged my 3 weak areas and gave exact modules —
-            <em>Implement device compliance</em>, <em>Implement dynamic deployment methods</em>,
-            <em>Administer endpoint applications</em> (~76 min total). Do those, then retake the practice assessment.</div>
+            <a href="https://learn.microsoft.com/training/modules/implement-device-compliance/" target="_blank" rel="noopener">Implement device compliance ↗</a>,
+            <a href="https://learn.microsoft.com/training/modules/implement-dynamic-deployment/" target="_blank" rel="noopener">Implement dynamic deployment methods ↗</a>,
+            <a href="https://learn.microsoft.com/training/modules/administer-endpoint-applications/" target="_blank" rel="noopener">Administer endpoint applications ↗</a>
+            (~76 min total). Do those, then retake the practice assessment.</div>
         </div>
       </details>
 
@@ -116,8 +129,11 @@
       <details class="acc">
         <summary><span class="acc-ico">🧪</span>Lab 01 — Create a Windows compliance policy<span class="acc-chev">▾</span></summary>
         <div class="acc-body">
-          <p>Domain 1 + the <em>Implement device compliance</em> module. Do it for real at
-             <code>intune.microsoft.com</code> in the test tenant — don't just read it.</p>
+          <p>Domain 1 + the
+             <a href="https://learn.microsoft.com/training/modules/implement-device-compliance/" target="_blank" rel="noopener">Implement device compliance ↗</a> module.
+             Do it for real in the <a href="https://intune.microsoft.com" target="_blank" rel="noopener">Intune admin center ↗</a>
+             (<code>intune.microsoft.com</code>) in the test tenant — don't just read it. Full docs:
+             <a href="https://learn.microsoft.com/en-us/mem/intune/protect/create-compliance-policy" target="_blank" rel="noopener">Create a compliance policy ↗</a>.</p>
           <h4>A · Create the policy</h4>
           <ol class="md-do">
             <li><strong>Devices → Compliance → Policies → Create policy</strong>.</li>
@@ -162,14 +178,34 @@
         <summary><span class="acc-ico">🛠️</span>How I study this (labs &amp; video, not reading)<span class="acc-chev">▾</span></summary>
         <div class="acc-body">
           <ul>
-            <li><strong>Lab tenant first</strong> — do every skill in Intune in my test tenant. ~60% of prep.</li>
-            <li><strong>Windows 11 eval VM</strong> — a free 90-day eval in Hyper-V/VirtualBox as the "device" to enrol.</li>
-            <li><strong>Video then replicate</strong> — Microsoft <em>Exam Readiness Zone (MD-102)</em>, Andy Malone MVP,
+            <li><strong>Lab tenant first</strong> — do every skill in the
+                <a href="https://learn.microsoft.com/en-us/mem/intune/" target="_blank" rel="noopener">Intune docs ↗</a> in my test tenant. ~60% of prep.</li>
+            <li><strong>Windows 11 eval VM</strong> — a
+                <a href="https://www.microsoft.com/en-us/evalcenter/evaluate-windows-11-enterprise" target="_blank" rel="noopener">free 90-day eval ↗</a> in Hyper-V/VirtualBox as the "device" to enrol.</li>
+            <li><strong>Video then replicate</strong> — Microsoft
+                <a href="https://learn.microsoft.com/en-us/shows/exam-readiness-zone/" target="_blank" rel="noopener">Exam Readiness Zone ↗</a>, Andy Malone MVP,
                 the official Intune YouTube channel. (Note: John Savill has no MD-102 cram — use his Intune deep-dives.)</li>
-            <li><strong>Free practice assessment</strong> — on the cert page; retake regularly, aim 80%+.</li>
+            <li><strong>Free practice assessment</strong> — retake regularly, aim 80%+; log each score in "My readiness" above.</li>
             <li><strong>Teach it / build it</strong> — this page is that: explaining it makes it stick.</li>
           </ul>
           <p class="muted">Full 8-week plan &amp; score log live in my notes: <code>IT-Level1-Notes\Notes\MD-102-Study-Plan.md</code>.</p>
+        </div>
+      </details>
+
+      <!-- ===== Official links ===== -->
+      <details class="acc">
+        <summary><span class="acc-ico">🔗</span>Official Microsoft Learn links<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>Everything in one place (all open in a new tab):</p>
+          <ul>
+            <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?tab=tab-started&amp;ns-enrollment-type=Collection&amp;ns-enrollment-id=p56uztr2w362e&amp;practice-assessment-type=certification" target="_blank" rel="noopener"><strong>My MD-102 study collection ↗</strong></a> — the "resume where I left off" link.</li>
+            <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/" target="_blank" rel="noopener">Certification page (Endpoint Administrator Associate) ↗</a></li>
+            <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/exams/md-102" target="_blank" rel="noopener">Exam MD-102 page ↗</a> — book it here when ready.</li>
+            <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/md-102" target="_blank" rel="noopener">Official study guide (skills measured) ↗</a></li>
+            <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/exams/md-102/practice/assessment?assessment-type=practice&amp;assessmentId=76" target="_blank" rel="noopener">Free practice assessment ↗</a></li>
+            <li><a href="https://learn.microsoft.com/en-us/shows/exam-readiness-zone/" target="_blank" rel="noopener">Exam Readiness Zone videos ↗</a></li>
+            <li><a href="https://learn.microsoft.com/en-us/mem/intune/" target="_blank" rel="noopener">Microsoft Intune documentation ↗</a> · <a href="https://intune.microsoft.com" target="_blank" rel="noopener">Intune admin center ↗</a></li>
+          </ul>
         </div>
       </details>
 
@@ -177,6 +213,7 @@
   </main>
 
   <div id="app-footer"></div>
-  <script src="main.js?v=3"></script>
+  <script src="main.js?v=5"></script>
+  <script src="md102.js?v=5"></script>
 </body>
 </html>

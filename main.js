@@ -80,7 +80,7 @@
     return '' +
       '<header class="site-header"><div class="wrap">' +
         '<a class="brand" href="index.html">' +
-          '<img class="brand-logo" src="Designer.png?v=3" alt="MaxNova Learning" />' +
+          '<img class="brand-logo" src="Designer.png?v=5" alt="MaxNova Learning" />' +
           '<span class="brand-txt"><b>Learning Hub</b><span class="sub">L1 &middot; MD-102</span></span>' +
         '</a>' +
         '<button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>' +

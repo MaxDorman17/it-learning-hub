@@ -701,3 +701,128 @@ details.acc[open] > summary { border-bottom: 2px dashed var(--border-soft); bord
   }
   .brand-logo { height: 42px; }
 }
+
+/* =====================================================================
+   LEFT SIDEBAR NAV (desktop ≥721px). Mobile keeps the top-bar + drawer.
+   ===================================================================== */
+:root { --side-w: 246px; }
+
+@media (min-width: 721px) {
+  body { padding-left: var(--side-w); }
+
+  .site-header {
+    position: fixed; top: 0; left: 0; bottom: 0; right: auto;
+    width: var(--side-w); height: auto;
+    flex-direction: column;
+    background: rgba(255,255,255,.92);
+    border-right: 3px solid var(--border); border-bottom: none;
+    overflow-y: auto;
+  }
+  .site-header .wrap {
+    flex-direction: column; align-items: stretch;
+    width: 100%; max-width: none; height: 100%;
+    padding: 22px 16px; gap: 4px;
+  }
+
+  /* brand stacks + gives the logo room at the top */
+  .brand {
+    flex-direction: column; align-items: center; text-align: center;
+    gap: 10px; padding-bottom: 16px; margin-bottom: 12px;
+    border-bottom: 2px dashed var(--border-soft);
+  }
+  .brand-logo { height: 88px; }
+  .brand-txt { align-items: center; }
+
+  /* nav goes vertical */
+  .nav { flex-direction: column; align-items: stretch; margin-left: 0; gap: 5px; }
+  .nav a {
+    padding: 10px 14px; border-radius: 12px; font-size: 15px;
+    border: 2px solid transparent; font-weight: 600;
+  }
+  .nav a:hover { background: var(--bg-softer); border-color: var(--border); color: var(--text); }
+  .nav a.active {
+    background: var(--accent); color: #fff; font-weight: 700;
+    border: 2px solid var(--border); box-shadow: 2px 2px 0 var(--border);
+  }
+
+  .nav-toggle { display: none; }
+}
+
+/* =====================================================================
+   MD-102 readiness tracker (editable practice-score widget)
+   ===================================================================== */
+.rd-card { padding: 22px 24px; margin-bottom: 26px; }
+.rd-level {
+  display: inline-block; font-family: var(--display); font-weight: 700; font-size: 13.5px;
+  padding: 5px 14px; border-radius: 999px; margin-bottom: 12px;
+  border: 2px solid var(--border); box-shadow: 2px 2px 0 var(--border);
+}
+.lvl-low   { background: #fde2e4; color: #b4232f; }
+.lvl-mid   { background: #fff0c2; color: #8a5a00; }
+.lvl-near  { background: #d9ecff; color: #1c4e94; }
+.lvl-ready { background: #d7f7e0; color: #0f7a37; }
+
+.rd-score { font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1; color: var(--text); }
+.rd-score span { font-size: 24px; color: var(--accent); }
+.rd-score small { font-family: var(--font); font-size: 13px; font-weight: 600; color: var(--text-muted); margin-left: 10px; }
+.rd-bar { height: 14px; margin: 14px 0 20px; }
+
+.rd-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 20px; }
+.rd-form label {
+  display: flex; flex-direction: column; gap: 5px;
+  font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted);
+}
+.rd-form input {
+  font-family: var(--font); font-size: 15px; color: var(--text);
+  padding: 9px 12px; background: #fff;
+  border: 2.5px solid var(--border); border-radius: 10px;
+}
+.rd-form input:focus { outline: none; box-shadow: 2px 2px 0 var(--accent); }
+.rd-form input#rd-pct { width: 108px; }
+.rd-form input#rd-note { min-width: 160px; }
+.rd-form .btn { padding: 10px 18px; }
+
+.rd-hist { width: 100%; border-collapse: collapse; font-size: 14px; }
+.rd-hist th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--text-dim); padding: 6px 8px; }
+.rd-hist td { padding: 9px 8px; border-top: 1px solid var(--border-soft); vertical-align: top; }
+.rd-hist td:first-child { white-space: nowrap; color: var(--text-muted); }
+.rd-note { color: var(--text-muted); }
+.rd-delta { font-size: 12px; font-weight: 800; }
+.rd-delta.up { color: var(--good); }
+.rd-delta.down { color: var(--bad); }
+.rd-reset { margin-top: 16px; background: none; border: none; color: var(--text-dim); font-size: 12.5px; font-weight: 700; cursor: pointer; text-decoration: underline; }
+.rd-reset:hover { color: var(--bad); }
+
+/* path links: keep them obviously clickable but on-theme */
+.paths a { color: var(--accent-2); font-weight: 700; }
+.paths a:hover { color: var(--accent); }
+
+/* Home "resume on Microsoft Learn" banner */
+.ms-learn-banner {
+  display: flex; align-items: center; gap: 16px; margin: 0 0 40px;
+  padding: 16px 20px; color: var(--text);
+  background: var(--star); border: 2.5px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.ms-learn-banner:hover { text-decoration: none; transform: translate(-2px,-2px); box-shadow: var(--shadow-lg); }
+.mlb-ico {
+  flex-shrink: 0; width: 46px; height: 46px; display: grid; place-items: center;
+  font-size: 24px; background: #fff; border: 2.5px solid var(--border); border-radius: 12px;
+}
+.mlb-txt { display: flex; flex-direction: column; line-height: 1.35; }
+.mlb-txt b { font-family: var(--display); font-size: 16.5px; }
+.mlb-txt .muted { font-size: 13.5px; color: #6a4a10; }
+.mlb-go {
+  margin-left: auto; flex-shrink: 0; font-weight: 800; font-size: 14px;
+  background: var(--border); color: #fff; padding: 8px 14px; border-radius: 10px;
+}
+@media (max-width: 560px) {
+  .ms-learn-banner { flex-wrap: wrap; }
+  .mlb-go { margin-left: 0; }
+}
+
+@media (max-width: 560px) {
+  .rd-form label { flex: 1 1 100%; }
+  .rd-form input#rd-pct, .rd-form input#rd-note { width: 100%; }
+}
