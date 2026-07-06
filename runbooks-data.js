@@ -456,6 +456,270 @@ window.RUNBOOKS = [
     ],
     related: ["printer-not-working", "vpn-wont-connect"],
     tags: ["slow", "performance", "freezing", "task manager", "startup", "disk", "ram", "lag"]
+  },
+
+  /* ---------------- Endpoint & Intune (MD-102) ---------------- */
+  {
+    id: "intune-enrollment-fail",
+    title: "Device won't enrol in Intune",
+    category: "Endpoint & Intune",
+    icon: "📲",
+    difficulty: "Medium",
+    time: "15 min",
+    summary: "A new or reset Windows device won't finish enrolling into Intune — usually a licence, an enrollment restriction, or the wrong join type.",
+    symptom: "Setup fails at \"Setting up your device / for work or school\", an enrollment error appears, or the device never shows up in the Intune admin center.",
+    askUser: [
+      "**What account** are they signing in with — a work account (`name@company`) or a personal Microsoft account?",
+      "**What's the exact error or error code** on screen?",
+      "**Is this a brand-new device, a reset, or a personal (BYOD) one** they're adding?",
+      "**Are other new devices** enrolling OK, or is it just this one? (Rules out a tenant-wide setting.)"
+    ],
+    diagnose: [
+      "**Licence check** — the user needs an **Intune licence** (it's included in Business Premium / M365 E3/E5). No licence = enrollment is blocked. Check in the 365 admin center → the user → Licenses.",
+      "**Enrollment restrictions** — Intune admin center → **Devices → Enrollment → Enrollment restrictions**. A platform (e.g. personal Windows) or device-limit restriction can block it.",
+      "**Join type** — is the device meant to be **Microsoft Entra joined** (corporate) or **Entra registered** (BYOD)? Wrong choice = wrong (or no) management. **Automatic enrollment** (Entra → Mobility (MDM) → Intune, MDM user scope) is what auto-enrols on Entra join.",
+      "**Device limit** — the user may have hit the max number of enrolled devices."
+    ],
+    fix: [
+      "**Assign the Intune licence** to the user, wait a few minutes, then retry.",
+      "**Check MDM auto-enrollment scope** — Entra admin center → Mobility (MDM and MAM) → Microsoft Intune → **MDM user scope = All** (or a group the user is in).",
+      "**Loosen the enrollment restriction** if the platform/type is being blocked for a legitimate device.",
+      "**Raise or clear the device limit** if they've hit the cap (remove an old stale device).",
+      "**Retry enrollment**: Settings → Accounts → **Access work or school** → Connect (BYOD), or re-run **Autopilot/OOBE** for a corporate device.",
+      "**Confirm** the device appears in Intune admin center → Devices → All devices."
+    ],
+    escalate: [
+      "**Autopilot profile / hardware-hash** problems on a corporate deployment → whoever owns Autopilot.",
+      "**Conditional Access** is blocking the enrollment sign-in itself.",
+      "Suspected **tenant-wide MDM/Entra misconfiguration**."
+    ],
+    related: ["device-not-compliant", "autopilot-deployment", "password-reset"],
+    tags: ["intune", "enrollment", "enrol", "mdm", "entra join", "byod", "licence", "autopilot", "md-102", "endpoint"]
+  },
+
+  {
+    id: "device-not-compliant",
+    title: "Device shows \"Not compliant\" / blocked from email",
+    category: "Endpoint & Intune",
+    icon: "🛡️",
+    difficulty: "Medium",
+    time: "15 min",
+    summary: "A user is blocked from Outlook/Teams/SharePoint because their device is Not compliant — the compliance policy failed a check and Conditional Access is enforcing it.",
+    symptom: "\"You can't get there from here\" / \"Your device does not meet compliance\", or access to email/files is blocked on one device.",
+    askUser: [
+      "**Which device** — their work laptop, a phone, or a personal machine?",
+      "**What's the exact message**, and which app were they opening (Outlook, Teams, a SharePoint site)?",
+      "**Did it work before**, or is this a new device / after a change?",
+      "**Is it just them**, or a whole group? (A group = a policy change; one person = their device.)"
+    ],
+    diagnose: [
+      "**Key concept:** the **compliance policy** is the health check (BitLocker on? password set? encrypted? up to date?). **Conditional Access** is what actually *blocks* access when the device is Not compliant. Compliance alone blocks nothing — the two work together.",
+      "**Find the failing setting** — Intune admin center → **Devices → All devices → (device) → Device compliance**. It lists each rule as pass/fail, so you can see exactly *why* it's Not compliant (e.g. BitLocker off).",
+      "**Check it's checked in** — compliance is evaluated **at check-in**, not instantly. A device that just changed may not have re-evaluated yet.",
+      "**Tenant setting** — *Devices → Compliance → Compliance settings → \"Mark devices with no compliance policy as\"*. If set to **Not compliant** and a device has no policy, it gets blocked."
+    ],
+    fix: [
+      "**Fix the failing rule on the device** — e.g. turn on **BitLocker**, set a password, install pending updates — whatever the compliance report flagged.",
+      "**Force a sync** so it re-evaluates: on the device, Settings → Accounts → **Access work or school** → (account) → Info → **Sync**. Or Intune admin center → the device → **Sync**.",
+      "**Grace period** — if it's a policy just rolled out, the *Mark device noncompliant* action's schedule may give users days to remediate before blocking.",
+      "**Confirm** the device flips to **Compliant** and access returns."
+    ],
+    escalate: [
+      "The **compliance policy or Conditional Access policy itself** is misconfigured and blocking many users → policy owner / security.",
+      "A **break-glass / lockout** situation where admins are locked out too.",
+      "The device **genuinely can't meet** a required control (old hardware, no TPM for BitLocker)."
+    ],
+    related: ["intune-enrollment-fail", "bitlocker-recovery", "mfa-reset"],
+    tags: ["compliance", "not compliant", "conditional access", "intune", "bitlocker", "blocked", "md-102", "endpoint", "device health"]
+  },
+
+  {
+    id: "autopilot-deployment",
+    title: "New laptop — Autopilot deployment",
+    category: "Endpoint & Intune",
+    icon: "🚀",
+    difficulty: "Medium",
+    time: "30 min",
+    summary: "Set up a brand-new laptop with zero manual imaging using Windows Autopilot — the user unboxes it, signs in, and Intune does the rest.",
+    symptom: "A new starter or replacement laptop needs configuring, or an Autopilot deploy is stuck on the Enrollment Status Page (ESP).",
+    askUser: [
+      "**Is the device already registered** for Autopilot (hardware hash uploaded / bought through a registered supplier)?",
+      "**Which user or profile** is it for — does the right **Autopilot deployment profile** target it?",
+      "**Where's it stuck** — network/OOBE, sign-in, or the Enrollment Status Page installing apps?",
+      "**Is it on a stable network** with internet? Autopilot is 100% cloud."
+    ],
+    diagnose: [
+      "**Registration** — Intune admin center → **Devices → Enrollment → Devices (Windows Autopilot)**. If the device's hardware hash isn't there, Autopilot can't claim it.",
+      "**Deployment profile** — check a profile is **assigned** to the device's group and the **mode** is right (user-driven, self-deploying, or pre-provisioning).",
+      "**Enrollment Status Page (ESP)** — this is what shows progress and can **block** the desktop until required apps/policies land. A stuck ESP usually means a required app is failing or timing out.",
+      "**Naming / groups** — dynamic group membership and the device-name template apply here."
+    ],
+    fix: [
+      "**Register the device** if missing — import the hardware hash (CSV) under Windows Autopilot devices, then assign it to the right group.",
+      "**Confirm the deployment profile** is assigned and correct; sync so the device picks it up.",
+      "**Stuck ESP:** check which **required app** is failing (Intune → the app → device install status). Fix or make the app non-blocking; you can also allow reset/retry on the ESP.",
+      "**Network:** move to a reliable connection; corporate Wi-Fi with tight filtering can break OOBE.",
+      "**Confirm** the device lands on the desktop, is Entra-joined, Intune-managed, and Compliant."
+    ],
+    escalate: [
+      "**Hardware-hash / OEM registration** issues with the supplier.",
+      "**Autopilot profile design** or app-packaging problems → whoever owns the Intune build.",
+      "Network/firewall blocking the **Autopilot & Windows endpoints**."
+    ],
+    related: ["intune-enrollment-fail", "company-portal-app-fail", "new-user-onboarding"],
+    tags: ["autopilot", "deployment", "esp", "enrollment status page", "oobe", "new laptop", "provisioning", "md-102", "endpoint", "intune"]
+  },
+
+  {
+    id: "company-portal-app-fail",
+    title: "App won't install from Company Portal",
+    category: "Endpoint & Intune",
+    icon: "📦",
+    difficulty: "Easy",
+    time: "15 min",
+    summary: "A user can't install an app Intune is supposed to deliver — assignment, dependencies, or the device not checking in are the usual suspects.",
+    symptom: "An app is missing, shows \"Install pending\" forever, or fails in the Company Portal / doesn't auto-install.",
+    askUser: [
+      "**Which app**, and is it **Required** (auto-installs) or **Available** (they install it from Company Portal)?",
+      "**What does Company Portal show** — Pending, Failed, or nothing at all?",
+      "**Just them, or others** who should get the same app?",
+      "**Is the device online and checked in** recently?"
+    ],
+    diagnose: [
+      "**Assignment** — Intune admin center → **Apps → the app → Properties → Assignments**. Is the user/device in a **Required** or **Available** group? If it's not assigned to them, it'll never appear.",
+      "**Install status** — the app's **Device/User install status** shows per-device success/failure and an error code.",
+      "**Dependencies & supersedence** — a Win32 app may need a dependency installed first, or be superseded by another version.",
+      "**Detection rules** — a misconfigured detection rule makes Intune think it's installed (or never installed). Common cause of \"stuck\".",
+      "**Check-in** — the device must sync to receive the app."
+    ],
+    fix: [
+      "**Fix the assignment** — add the user/device to the right group (Required to force it, Available for opt-in).",
+      "**Force a sync** (device → Sync in Intune, or Company Portal → Settings → Sync) so it pulls the assignment.",
+      "**Win32 apps:** verify the **detection rule** actually matches what the installer leaves behind, and that **dependencies** are also assigned.",
+      "**Reinstall:** in Company Portal, retry; for Required apps, the next check-in retries automatically.",
+      "**Confirm** the app installs and shows **Installed** in the app's device status."
+    ],
+    escalate: [
+      "**App packaging** (bad `.intunewin`, wrong install command, broken detection) → whoever packages apps.",
+      "**Licensing** for store/VPP apps (Apple VPP, Microsoft Store).",
+      "A failure **affecting every targeted device** → likely the package, not the user."
+    ],
+    related: ["autopilot-deployment", "intune-enrollment-fail", "slow-computer"],
+    tags: ["company portal", "app deployment", "win32", "intune", "required", "available", "detection rule", "md-102", "endpoint"]
+  },
+
+  {
+    id: "bitlocker-recovery",
+    title: "BitLocker recovery key needed",
+    category: "Endpoint & Intune",
+    icon: "🔐",
+    difficulty: "Easy",
+    time: "10 min",
+    summary: "A device is stuck on the blue BitLocker recovery screen asking for a 48-digit key — you can retrieve it from Intune/Entra if the device is managed.",
+    symptom: "Boot stops at \"BitLocker recovery — Enter the recovery key\" with a Key ID, and the user can't get into Windows.",
+    askUser: [
+      "**⚠️ Verify identity first** — a recovery key unlocks the whole disk; treat it like a password.",
+      "**What's the Key ID** shown on the recovery screen (the first 8 characters identify which key)?",
+      "**What triggered it** — a firmware/BIOS update, hardware change, or docking change? (Helps prevent a repeat.)",
+      "**Is the device Intune/Entra managed** (a work laptop)? That's how we'll find the key."
+    ],
+    diagnose: [
+      "**Where the key lives** — for an Entra-joined/Intune-managed device, the recovery key is **escrowed** to Entra ID / Intune. You look it up; you don't need it stored on paper.",
+      "**Match the Key ID** — the recovery screen shows a Key ID so you hand over the *correct* key if there are several.",
+      "**Root cause** — BitLocker triggers recovery when it sees a change it doesn't trust (TPM/boot change, BIOS update, hardware change)."
+    ],
+    fix: [
+      "**Retrieve the key:** Intune admin center → **Devices → (the device) → Recovery keys**, or **Entra admin center → Devices → (device) → BitLocker keys**, or the user's own **myaccount / Company Portal** device page.",
+      "**Match the Key ID** and read the 48-digit recovery key to the (verified) user.",
+      "**Get them booted**, then investigate the trigger so it doesn't recur (e.g. suspend BitLocker before a planned BIOS update).",
+      "**Rotate the key** afterwards if it may have been exposed: Intune → the device → **Rotate BitLocker keys**.",
+      "**Confirm** they're back into Windows."
+    ],
+    escalate: [
+      "**No key in Entra/Intune** (device wasn't managed or didn't escrow) → data-recovery decision with the business.",
+      "**Repeated recovery prompts** pointing at failing hardware/TPM.",
+      "Suspected **theft/compromise** of the device."
+    ],
+    related: ["device-not-compliant", "wipe-retire-device", "account-lockout"],
+    tags: ["bitlocker", "recovery key", "encryption", "tpm", "intune", "entra", "rotate", "md-102", "endpoint"]
+  },
+
+  {
+    id: "wipe-retire-device",
+    title: "Wipe or retire a lost / returned device",
+    category: "Endpoint & Intune",
+    icon: "🧹",
+    difficulty: "Medium",
+    time: "10 min",
+    summary: "Remotely clear a lost, stolen, or returned device from Intune — knowing the crucial difference between Wipe, Retire, and Fresh Start.",
+    symptom: "A device is lost/stolen, or a leaver's laptop is back and needs clearing before reissue.",
+    askUser: [
+      "**Lost/stolen, or returned in-hand?** (Changes urgency and which action.)",
+      "**Corporate-owned or personal (BYOD)?** BYOD changes what you're *allowed* to remove.",
+      "**Whose device**, and has the account already been handled (see the offboarding runbook)?",
+      "**Any data on it** that must be preserved first?"
+    ],
+    diagnose: [
+      "**Know the three actions** (Intune → the device → remote actions):",
+      "**Wipe** — factory-resets the device, removing **everything** (personal + company). For lost/stolen or full re-provision. Optionally keep it enrolled/retain user data.",
+      "**Retire** — removes **only company data/policies** and unenrolls it, leaving personal data. The right choice for **BYOD**.",
+      "**Fresh Start** — removes apps but keeps the device Entra-joined/managed and can keep user data — good for fixing a messy Windows install.",
+      "**Lost mode / Locate** (where supported) can help find or lock a device before wiping."
+    ],
+    fix: [
+      "**Verify authority** — wiping is destructive; confirm the request is legitimate (manager/HR/security).",
+      "**Lost/stolen corporate:** **Wipe** it; if supported, **lock/locate** first.",
+      "**BYOD:** **Retire** — pull company data only; you must not nuke someone's personal phone.",
+      "**Returned corporate for reissue:** **Wipe** (or **Fresh Start**) to hand it on clean.",
+      "**Coordinate with offboarding** — block sign-in, revoke sessions, reassign resources (see the leaver runbook).",
+      "**Confirm** the action completes in Intune (status: Pending → done) and the device drops out of management."
+    ],
+    escalate: [
+      "**Legal hold / investigation** — preserve, don't wipe; escalate first.",
+      "Device **won't check in** to receive the wipe (offline/stolen) — may need conditional access block + credential reset instead.",
+      "**Data recovery** needed before wipe."
+    ],
+    related: ["user-offboarding", "bitlocker-recovery", "device-not-compliant"],
+    tags: ["wipe", "retire", "fresh start", "lost", "stolen", "byod", "remote action", "intune", "md-102", "endpoint"]
+  },
+
+  {
+    id: "windows-update-ring",
+    title: "Device not getting Windows updates",
+    category: "Endpoint & Intune",
+    icon: "🔄",
+    difficulty: "Medium",
+    time: "15 min",
+    summary: "A managed device is behind on updates or stuck on an old build — usually its update ring, a deferral/pause, or it not checking in.",
+    symptom: "A device is missing security updates, stuck on an old Windows version, or a feature update won't roll out.",
+    askUser: [
+      "**Which device**, and what build is it on now vs. what it should be? (`winver` shows the build.)",
+      "**Is it just this device**, or a whole group behind? (A group = a ring/policy; one = that device.)",
+      "**Is it online and used regularly**, or a laptop that's rarely on?",
+      "**Any error** in Settings → Windows Update?"
+    ],
+    diagnose: [
+      "**Update rings** — Intune admin center → **Devices → Manage updates → Windows 10 and later updates → Update rings**. A ring sets **deferral** (how many days quality/feature updates wait) and **active hours**. The device may simply be inside its deferral window.",
+      "**Pause** — a ring or a feature-update policy may be **paused**, holding updates back on purpose.",
+      "**Feature updates** are controlled separately (a **Feature updates** policy sets the target version, e.g. Windows 11 23H2).",
+      "**Check-in** — a device that's rarely online just hasn't had the time/connectivity to pull updates. Compliance/updates need check-ins.",
+      "**Delivery Optimization / bandwidth** and disk space can also stall updates."
+    ],
+    fix: [
+      "**Confirm the ring assignment** — the device's group should be assigned an update ring; check the **deferral days** aren't unexpectedly long.",
+      "**Resume** any paused ring or feature-update policy.",
+      "**Set/confirm the target build** in the **Feature updates** policy if it needs moving to a newer version.",
+      "**Force a check-in** (Intune → device → Sync) and on the device run **Settings → Windows Update → Check for updates**.",
+      "**Free disk space** and ensure it's online long enough to download and reboot.",
+      "**Confirm** the device reports back up to date (Intune update reports / `winver`)."
+    ],
+    escalate: [
+      "**Ring / feature-update policy design** affecting many devices → whoever owns the update strategy.",
+      "**Autopatch / Hotpatch** configuration issues.",
+      "A specific update **failing to install** with an error across devices (bad update / compatibility)."
+    ],
+    related: ["device-not-compliant", "slow-computer", "company-portal-app-fail"],
+    tags: ["windows update", "update ring", "deferral", "feature update", "autopatch", "patching", "intune", "md-102", "endpoint"]
   }
 
 ];

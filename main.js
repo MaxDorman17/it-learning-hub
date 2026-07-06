@@ -9,6 +9,7 @@
   /* ---------- Site nav definition (single source of truth) ---------- */
   var NAV = [
     { href: "index.html",         label: "Home" },
+    { href: "md102.html",         label: "MD-102" },
     { href: "runbooks.html",      label: "Runbooks" },
     { href: "ms365.html",         label: "MS365 Admin" },
     { href: "voip.html",          label: "VoIP" },
@@ -18,9 +19,9 @@
     { href: "practice.html",      label: "Practice" }
   ];
 
-  /* Totals used for progress %. These are targets for later phases and
-     will be replaced by live counts once content exists. */
-  var TARGETS = { runbooks: 12, quizzes: 6, flashcards: 40 };
+  /* Totals used for progress %. Kept in step with the content that exists:
+     19 runbooks (12 core L1 + 7 Endpoint/Intune), 8 quizzes, ~53 flashcards. */
+  var TARGETS = { runbooks: 19, quizzes: 8, flashcards: 40 };
 
   /* ---------- localStorage progress layer ---------- */
   var KEY = "ithub.progress.v1";

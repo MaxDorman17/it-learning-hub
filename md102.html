@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MD-102 Study — IT Engineer Learning Hub</title>
+  <meta name="description" content="My MD-102 Endpoint Administrator study hub: exam blueprint, learning paths, Intune lab walkthroughs and exam traps." />
+  <link rel="stylesheet" href="style.css?v=2" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="wrap guide">
+      <section class="page-hero">
+        <span class="eyebrow">My certification goal</span>
+        <h1>MD-102: Endpoint Administrator</h1>
+      </section>
+
+      <p class="guide-intro">The exam I'm working toward to earn the <strong>Microsoft 365 Certified:
+        Endpoint Administrator Associate</strong> badge — the real "I can run a helpdesk" credential, and
+        almost entirely <strong>Microsoft Intune</strong>, which is exactly the day-to-day at Sempervox.
+        This page is my map: the blueprint, the learning paths, hands-on labs and the concepts the exam
+        loves to trap you on. Study the concept &rarr; do it in the lab tenant &rarr; test myself.</p>
+
+      <div class="md-facts">
+        <div class="md-fact"><div class="k">Exam</div><div class="v">MD-102</div></div>
+        <div class="md-fact"><div class="k">Pass mark</div><div class="v">700 <small>/ 1000</small></div></div>
+        <div class="md-fact"><div class="k">Cost</div><div class="v">~£110</div></div>
+        <div class="md-fact"><div class="k">Renewal</div><div class="v">Yearly <small>· free</small></div></div>
+      </div>
+
+      <div class="callout good"><b>Where I'm at:</b> cold practice-assessment baseline <b>40%</b> (2026-07-06).
+        Target is a steady <b>80%+</b> before booking. Weak areas flagged: <em>Prepare infrastructure ·
+        Manage &amp; maintain devices · Protect devices</em>.</div>
+
+      <!-- ===== Blueprint ===== -->
+      <details class="acc" open>
+        <summary><span class="acc-ico">🎯</span>Exam blueprint — what's actually tested<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>The exam is weighted like this (skills measured as of 24 July 2026). Notice it's nearly all Intune —
+             so the whole strategy is <em>live in the Intune admin center</em>.</p>
+          <table class="blueprint">
+            <thead><tr><th>Domain</th><th>Weight</th><th>What it really is</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Prepare infrastructure for devices</strong><div class="bar"><span style="width:23%"></span></div></td><td class="wt">20–25%</td><td>Entra join, enrolling devices, compliance policies</td></tr>
+              <tr><td><strong>Manage &amp; maintain devices</strong><div class="bar"><span style="width:28%"></span></div></td><td class="wt">25–30%</td><td>Autopilot, config profiles, remote actions</td></tr>
+              <tr><td><strong>Protect devices</strong><div class="bar"><span style="width:18%"></span></div></td><td class="wt">15–20%</td><td>BitLocker, antivirus/firewall, Defender, update rings</td></tr>
+              <tr><td><strong>Manage &amp; secure applications</strong><div class="bar"><span style="width:18%"></span></div></td><td class="wt">15–20%</td><td>Deploy apps (Win32, Store, M365 Apps), app protection</td></tr>
+              <tr><td><strong>Optimize operations</strong><div class="bar"><span style="width:13%"></span></div></td><td class="wt">10–15%</td><td>PowerShell + Graph, Endpoint Analytics, reporting</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <!-- ===== Learning paths ===== -->
+      <details class="acc">
+        <summary><span class="acc-ico">📚</span>The 7 MD-102 learning paths (study order)<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>Free on Microsoft Learn. Search "<strong>MD-102</strong>" and pick the paths that start with MD-102
+             (<em>not</em> MS-102 — that's a different, heavier exam). Do them in this order:</p>
+          <ul class="paths">
+            <li><span class="n">1.</span> Explore endpoint management <span class="mods">4 modules · foundation</span></li>
+            <li><span class="n">2.</span> Execute device enrollment <span class="mods">3 modules</span></li>
+            <li><span class="n">3.</span> Manage authentication &amp; compliance <span class="mods">4 modules</span></li>
+            <li><span class="n">4.</span> Deploy using cloud based tools <span class="mods">6 modules · Autopilot</span></li>
+            <li><span class="n">5.</span> Examine application management <span class="mods">3 modules</span></li>
+            <li><span class="n">6.</span> Manage endpoint security <span class="mods">4 modules</span></li>
+            <li><span class="n">7.</span> Deploy using on-premises tools <span class="mods">3 modules · skim</span></li>
+          </ul>
+          <div class="callout"><b>Fastest win first:</b> Microsoft flagged my 3 weak areas and gave exact modules —
+            <em>Implement device compliance</em>, <em>Implement dynamic deployment methods</em>,
+            <em>Administer endpoint applications</em> (~76 min total). Do those, then retake the practice assessment.</div>
+        </div>
+      </details>
+
+      <!-- ===== Key concepts / traps ===== -->
+      <details class="acc">
+        <summary><span class="acc-ico">🧠</span>Key concepts &amp; exam traps<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <h4>Compliance vs Conditional Access (the #1 trap)</h4>
+          <p>A <strong>compliance policy</strong> only <em>labels</em> a device Compliant / Not compliant — it blocks
+             nothing on its own. <strong>Conditional Access</strong> is what enforces "only compliant devices get
+             email/files". They're a <em>pair</em>. Compliance is evaluated <strong>at check-in</strong>, not instantly.</p>
+
+          <h4>Join types</h4>
+          <ul>
+            <li><strong>Microsoft Entra joined</strong> — corporate-owned, cloud-managed. The default for company devices.</li>
+            <li><strong>Entra registered</strong> — personal / BYOD; the device is known but the user keeps ownership.</li>
+            <li><strong>Hybrid Entra joined</strong> — joined to on-prem AD <em>and</em> Entra (orgs with existing AD).</li>
+          </ul>
+
+          <h4>Enrollment</h4>
+          <p><strong>Automatic enrollment</strong> = Entra → Mobility (MDM) → Intune, <strong>MDM user scope = All</strong>.
+             Needs an <strong>Intune licence</strong>. <strong>Windows Autopilot</strong> pre-registers a device (hardware
+             hash) so it self-configures at OOBE; the <strong>Enrollment Status Page (ESP)</strong> can block the desktop
+             until required apps/policies land.</p>
+
+          <h4>Remote actions — know the difference</h4>
+          <ul>
+            <li><strong>Wipe</strong> — factory reset, removes <em>everything</em>. Lost/stolen or full re-provision.</li>
+            <li><strong>Retire</strong> — removes <em>only company data</em>, leaves personal. The BYOD choice.</li>
+            <li><strong>Fresh Start</strong> — removes apps, keeps the device managed (fix a messy Windows).</li>
+          </ul>
+
+          <h4>Other must-knows</h4>
+          <ul>
+            <li><strong>BitLocker</strong> recovery keys are escrowed to <strong>Entra/Intune</strong> — look up by Key ID; you can <strong>rotate</strong> them.</li>
+            <li>The <em>Mark device noncompliant</em> action is automatic, mandatory, defaults to <strong>0 days</strong>.</li>
+            <li>Apps: <strong>Required</strong> auto-installs; <strong>Available</strong> is opt-in via Company Portal. Win32 apps need correct <strong>detection rules</strong> + dependencies.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- ===== Lab 01 ===== -->
+      <details class="acc">
+        <summary><span class="acc-ico">🧪</span>Lab 01 — Create a Windows compliance policy<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>Domain 1 + the <em>Implement device compliance</em> module. Do it for real at
+             <code>intune.microsoft.com</code> in the test tenant — don't just read it.</p>
+          <h4>A · Create the policy</h4>
+          <ol class="md-do">
+            <li><strong>Devices → Compliance → Policies → Create policy</strong>.</li>
+            <li>Platform: <strong>Windows 10 and later → Create</strong>.</li>
+            <li><em>Basics:</em> Name <code>Windows – Baseline Compliance (LAB)</code>.</li>
+            <li><em>Compliance settings:</em> turn on <strong>Require BitLocker</strong>, <strong>Secure Boot</strong>,
+                <strong>require a password</strong> (min length 6), <strong>encryption</strong>.</li>
+            <li><em>Actions for noncompliance:</em> note the auto-added <strong>Mark device noncompliant</strong> (0 days).</li>
+            <li><em>Assignments:</em> assign to a test group (user or device group).</li>
+            <li><strong>Review + create.</strong> Confirm it shows <strong>Assigned = Yes</strong>.</li>
+          </ol>
+          <h4>B · The tenant trap</h4>
+          <p>Check <strong>Devices → Compliance → Compliance settings → "Mark devices with no compliance policy as"</strong>.
+             If it's <em>Not compliant</em> + Conditional Access is on, devices with no policy get blocked. Classic ticket.</p>
+          <h4>C · Verify</h4>
+          <p>On a device: <strong>Settings → Accounts → Access work or school → Sync</strong>, then check
+             <strong>Devices → the device → Device compliance</strong> for pass/fail per rule.</p>
+          <div class="callout"><b>Stretch:</b> add a Conditional Access policy that requires a compliant device, so you
+             see it actually <em>enforce</em> — but only against a <b>test user</b>, with a break-glass admin excluded.</div>
+        </div>
+      </details>
+
+      <!-- ===== Practice it ===== -->
+      <details class="acc">
+        <summary><span class="acc-ico">🎫</span>Practise with real tickets &amp; quizzes<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <p>The best revision is working tickets, not re-reading. I've got <strong>7 Endpoint &amp; Intune runbooks</strong>
+             in the same symptom&rarr;fix&rarr;escalate shape as the real job, and two MD-102 quizzes:</p>
+          <ul>
+            <li><a href="runbooks.html">Runbooks</a> → filter the <strong>Endpoint &amp; Intune</strong> category:
+                enrollment fails, Not-compliant/blocked, Autopilot, Company Portal apps, BitLocker recovery, wipe/retire.</li>
+            <li><a href="practice.html">Practice</a> → <strong>MD-102: Devices &amp; Intune</strong> and
+                <strong>MD-102: Compliance &amp; Security</strong> quizzes.</li>
+          </ul>
+          <div class="callout"><b>The loop:</b> weak area → learn module → do the lab → work the runbook →
+            take the quiz → retake the practice assessment → log the score. Climb from 40% to 80%+.</div>
+        </div>
+      </details>
+
+      <!-- ===== Study method ===== -->
+      <details class="acc">
+        <summary><span class="acc-ico">🛠️</span>How I study this (labs &amp; video, not reading)<span class="acc-chev">▾</span></summary>
+        <div class="acc-body">
+          <ul>
+            <li><strong>Lab tenant first</strong> — do every skill in Intune in my test tenant. ~60% of prep.</li>
+            <li><strong>Windows 11 eval VM</strong> — a free 90-day eval in Hyper-V/VirtualBox as the "device" to enrol.</li>
+            <li><strong>Video then replicate</strong> — Microsoft <em>Exam Readiness Zone (MD-102)</em>, Andy Malone MVP,
+                the official Intune YouTube channel. (Note: John Savill has no MD-102 cram — use his Intune deep-dives.)</li>
+            <li><strong>Free practice assessment</strong> — on the cert page; retake regularly, aim 80%+.</li>
+            <li><strong>Teach it / build it</strong> — this page is that: explaining it makes it stick.</li>
+          </ul>
+          <p class="muted">Full 8-week plan &amp; score log live in my notes: <code>IT-Level1-Notes\Notes\MD-102-Study-Plan.md</code>.</p>
+        </div>
+      </details>
+
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="main.js?v=2"></script>
+</body>
+</html>

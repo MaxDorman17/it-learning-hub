@@ -125,6 +125,46 @@ window.QUIZZES = [
         options: ["Microsoft", "Google", "Nous Research (open-source)", "Sempervox"],
         answer: 2, explain: "Hermes is Nous Research's open-source AI agent platform — separate from Microsoft's stack." }
     ]
+  },
+  {
+    id: "quiz-md102-devices", title: "MD-102: Devices & Intune", icon: "📲",
+    questions: [
+      { q: "A Windows device is Entra joined but won't auto-enrol into Intune. What's the most common cause?",
+        options: ["No internet", "The user has no Intune licence, or MDM user scope isn't set", "Wrong time zone", "BitLocker is off"],
+        answer: 1, explain: "Automatic enrollment needs an Intune licence AND the Entra MDM user scope set to All (or the user's group)." },
+      { q: "For a personal BYOD phone, which remote action removes ONLY company data?",
+        options: ["Wipe", "Retire", "Fresh Start", "Reset"],
+        answer: 1, explain: "Retire unenrols the device and removes company data/policies only, leaving personal data. Wipe factory-resets everything." },
+      { q: "In Windows Autopilot, what does the Enrollment Status Page (ESP) do?",
+        options: ["Assigns licences", "Shows deployment progress and can block the desktop until required apps/policies apply", "Resets the password", "Joins the device to a domain"],
+        answer: 1, explain: "The ESP tracks setup and can hold the device at OOBE until required apps and policies finish — a stuck app there blocks the desktop." },
+      { q: "You need a device's BitLocker recovery key for a managed laptop. Where is it?",
+        options: ["Printed in the box", "Escrowed to Entra ID / Intune (look up by Key ID)", "Only on the device", "Emailed to the user"],
+        answer: 1, explain: "Managed devices escrow the key to Entra/Intune — retrieve it under the device's Recovery keys, matching the Key ID." },
+      { q: "An Intune 'Required' app never installs, but the device is online. First thing to check?",
+        options: ["Reinstall Windows", "The app's assignment — is the user/device actually in the Required group?", "Buy more licences", "Reset the router"],
+        answer: 1, explain: "If it's not assigned to that user/device (or only Available), it won't install. Check assignment, then detection rules and sync." }
+    ]
+  },
+  {
+    id: "quiz-md102-security", title: "MD-102: Compliance & Security", icon: "🛡️",
+    questions: [
+      { q: "A compliance policy on its own will…",
+        options: ["Block access to email", "Only label a device Compliant or Not compliant", "Wipe the device", "Reset the password"],
+        answer: 1, explain: "Compliance policy = the health check (label only). Conditional Access is what actually blocks access based on that label." },
+      { q: "What actually enforces 'only compliant devices can reach email'?",
+        options: ["The compliance policy", "A Conditional Access policy requiring a compliant device", "BitLocker", "Autopilot"],
+        answer: 1, explain: "Conditional Access does the enforcing — 'require device to be marked as compliant'. The two work as a pair." },
+      { q: "When is device compliance evaluated?",
+        options: ["Instantly on any change", "When the device checks in / syncs with Intune", "Once a month", "Only at enrollment"],
+        answer: 1, explain: "Compliance is evaluated at check-in — that's why you force a Sync after fixing a failing setting." },
+      { q: "The default 'Mark device noncompliant' action is set to how many days by default?",
+        options: ["0 (immediately)", "7", "30", "It's optional"],
+        answer: 0, explain: "It's automatic, can't be removed, and defaults to 0 days (immediate). Change its schedule to create a grace period." },
+      { q: "The tenant setting 'Mark devices with no compliance policy as' matters because…",
+        options: ["It sets the time zone", "If set to Not compliant, devices without any policy can be blocked by Conditional Access", "It assigns licences", "It controls BitLocker"],
+        answer: 1, explain: "A classic lockout trap: no policy + this set to Not compliant + Conditional Access = users blocked." }
+    ]
   }
 ];
 
