@@ -10,6 +10,8 @@
   var NAV = [
     { href: "index.html",         label: "Home" },
     { href: "md102.html",         label: "MD-102" },
+    { href: "dynamics.html",      label: "Dynamics 365" },
+    { href: "dynamics-tickets.html", label: "Ticket Lab" },
     { href: "runbooks.html",      label: "Runbooks" },
     { href: "ms365.html",         label: "MS365 Admin" },
     { href: "voip.html",          label: "VoIP" },
@@ -72,6 +74,8 @@
 
   function buildHeader() {
     var here = currentPage();
+    // the Dynamics course spans several pages — keep the right nav item highlighted
+    if (here === "dynamics-module.html" || here === "dynamics-sim.html") here = "dynamics.html";
     var links = NAV.map(function (item) {
       var active = item.href === here ? " active" : "";
       return '<a href="' + item.href + '" class="' + active.trim() + '">' + item.label + "</a>";

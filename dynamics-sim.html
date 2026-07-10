@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulator — Dynamics 365 Customer Service course</title>
+  <meta name="description" content="A simplified, fictional Customer Service CRM sandbox: cases, queues, timelines, notes, assign, escalate and resolve. Practice freely." />
+  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="dynamics.css?v=6" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="wrap">
+      <section class="page-hero">
+        <span class="eyebrow">Practice sandbox</span>
+        <h1>Dynamics-style CRM simulator</h1>
+        <p class="lead">A simplified, fictional service-desk interface to explore safely. Pick a queue,
+          open a case, assign it to yourself, add a CLEAR note, then escalate or resolve. All organisations,
+          people and data are invented — nothing here is real, and it resets when you reload.</p>
+      </section>
+
+      <div class="dyn-disclaimer" style="margin-bottom:20px"><b>Note:</b> This resembles a professional
+        Customer Service interface for learning only. Real employers customise forms, fields, queues,
+        routing and permissions — always follow your employer's documented procedures.</div>
+
+      <div id="crm-sim"><!-- rendered by dynamics-sim.js --></div>
+
+      <p class="muted" style="margin-top:20px;font-size:14px">Ready for guided practice?
+        <a href="dynamics-module.html#m14">Try the Scenario Lab →</a> or
+        <a href="dynamics.html">return to the course dashboard</a>.</p>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="main.js?v=6"></script>
+  <script src="dynamics-progress.js?v=6"></script>
+  <script src="dynamics-sim.js?v=6"></script>
+</body>
+</html>

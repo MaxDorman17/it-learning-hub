@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticket Lab — 50 practice tickets · Dynamics 365 course</title>
+  <meta name="description" content="50 realistic IT support tickets to practise on — each a mini test with a priority check, a quick question and a full step-by-step walkthrough." />
+  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="dynamics.css?v=6" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="wrap">
+      <section class="page-hero">
+        <span class="eyebrow">Practice · Ticket Lab</span>
+        <h1>50 real-world tickets</h1>
+        <p class="lead">Work them like the real thing: read the ticket, pick a priority, answer a quick check —
+          then reveal the step-by-step walkthrough of how to handle it. Mark each as worked to track your progress.</p>
+      </section>
+
+      <div class="dyn-disclaimer" style="margin-bottom:20px"><b>Note:</b> These teach common IT support workflows on a
+        Dynamics-style desk. Tools, priority matrices, queues and procedures vary by employer — always follow your
+        company's documented procedures and security policy. <b>Never record passwords, MFA codes or recovery secrets
+        in a ticket.</b></div>
+
+      <div id="tck-app"><!-- rendered by dynamics-tickets.js --></div>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="main.js?v=6"></script>
+  <script src="dynamics-progress.js?v=6"></script>
+  <script src="dynamics-tickets-data.js?v=6"></script>
+  <script src="dynamics-tickets.js?v=6"></script>
+</body>
+</html>
